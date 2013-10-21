@@ -10,16 +10,21 @@ import java.util.Random;
  */
 public class Screen {
 	
+	// Global random object all classes extending screen can access.
 	public Random rand = new Random();
+	
+	// Instance of game the screen is assigned too.
 	public Game game;
 
 	public Screen(Game game) {
 		this.game = game;
 	}
 	
+	// Abstract update method overridden in other screen classes.
 	public void update() {	
 	}
 	
+	// Abstract render method overridden in other screen classes.
 	public void render() {
 	}
 }

@@ -6,11 +6,19 @@ import gamejam.team_filipino.src.utils.MathHelper;
 
 public class SplashScreen extends Screen {
 
+	/**
+	 * Constructs the splash screen.
+	 * @param game
+	 */
 	public SplashScreen(Game game) {
 		super(game);
 	}
 	
+	// The time (in updates) the screen has been active for. Used for switching the screen after a few seconds automatically.
 	int activeTime = 0;
+	/**
+	 * Updates the screen 
+	 */
 	public void update() {
 		activeTime++;
 		if(activeTime >= MathHelper.getSeconds(5.3)) {
@@ -18,6 +26,9 @@ public class SplashScreen extends Screen {
 		}
 	}
 	
+	/**
+	 * Renders the screen.
+	 */
 	public void render() {
 		if(activeTime <= MathHelper.getSeconds(5)) {
 			game.get2DGraphics().drawImage(Images.GUI_SPLASH, 0, 0, game.getDrawWidth(), game.getDrawHeight(), null);
