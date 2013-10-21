@@ -4,11 +4,20 @@ import gamejam.team_filipino.src.Images;
 
 public class Picard {
 	
+	/**
+	 * If the value is -1, then an animation can play. If an animation is already playing e.g animationIndex = 1,
+	 * then to prevent animations cutting off when the speed of the game gets faster, it prevents a new animation
+	 * from playing before the current one is completed, in which animationIndex returns to -1.
+	 */
 	public static int animationIndex = -1;
+	// Controls the image used in the portrait on the game screen.
 	public static int portraitIndex = 0;
 	
+	// X and Y coordinates of Picard.
 	public int x, y;
+	// Width of Picard.
 	public int width = 256;
+	// Height of Picard.
 	public int height = 256;
 	
 	// Animation played whilst idle
@@ -22,6 +31,9 @@ public class Picard {
 	// Animation played when moving to a RIGHT arrow
 	private Animation rightAnimation;
 	
+	/**
+	 * Picard constructor
+	 */
 	public Picard() {
 		x = 450;
 		y = 55;
@@ -32,6 +44,10 @@ public class Picard {
 		downAnimation = new Animation(Images.PICARD_DOWN_SET, .1, false, x, y, width, height);
 	}
 	
+	/**
+	 * Updates Picard
+	 * Controls which animation should be played.
+	 */
 	public void update() {
 		switch(animationIndex) {
 		case -1: // IDLE MOVE
@@ -52,6 +68,10 @@ public class Picard {
 		}
 	}
 	
+	/**
+	 * Renders Picard
+	 * Controls which animation should be rendered.
+	 */
 	public void render() {
 		switch(animationIndex) {
 		case -1: // IDLE MOVE
