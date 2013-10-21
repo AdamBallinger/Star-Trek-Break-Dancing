@@ -11,15 +11,23 @@ import java.awt.Font;
 
 public class HomeScreen extends Screen {
 	
+	/**
+	 * Constructs the home screen.
+	 * @param game : Game : Instance of Game the screen is assigned too.
+	 */
 	public HomeScreen(Game game) {
 		super(game);
-		Sound.music_picard.stop();
+		Sound.music_picard.stop(); // Forces music to stop to prevent it playing if the user escapes from an old game.
 		Sound.music_trekkin.stop();
-		Picard.portraitIndex = 0;
-		game.lives = 10;
+		Picard.portraitIndex = 0; // Resets the portrait image to neutral.
+		game.lives = 10; // Resets game lives.
 	}
 	
 	int flashTimer;
+	/**
+	 * Updates the screen.
+	 * Checks if the user presses enter in order to start the game.
+	 */
 	public void update() {
 		flashTimer++;
 		if(game.input.enter.clicked) {
@@ -27,11 +35,15 @@ public class HomeScreen extends Screen {
 		}
 	}
 	
+	/**
+	 * Renders the contents of home screen to the screen.
+	 */
 	public void render() {
+		// Draws the background Image.
 		game.get2DGraphics().drawImage(Images.GUI_HOME, 0, 0, game.getDrawWidth(), game.getDrawHeight(), null);
 		game.get2DGraphics().setColor(Color.BLACK);
 		
-		// Draws rectangle over Press Enter text to make it appear flashing.
+		// Draws rectangle over Press Enter text to make it appear flashing. (Press Enter text was apart of the background image).
 		if(flashTimer >= MathHelper.getSeconds(.7)) {
 			game.get2DGraphics().fillRect(300, 465, 190, 40);
 			if(flashTimer >= MathHelper.getSeconds(1.2)) {

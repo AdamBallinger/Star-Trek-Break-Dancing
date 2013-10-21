@@ -15,11 +15,10 @@ import java.util.List;
 
 public class GameScreen extends Screen {
 
-	/**
-	 * Stores the directional arrows displayed.
-	 */
+	// Stores the directional arrows displayed.
 	private List<Arrow> arrows = new ArrayList<Arrow>();
 	
+	// Stores the glow effects from the arrows.
 	private List<ArrowGlow> arrowsGlow = new ArrayList<ArrowGlow>();
 	
 	// Instance of the Picard sprite that dances.
@@ -27,7 +26,7 @@ public class GameScreen extends Screen {
 	
 	/**
 	 * Screen for the game.
-	 * @param game game object
+	 * @param game : Game : Instance of Game the screen is assigned too.
 	 */
 	public GameScreen(Game game) {
 		super(game);
@@ -84,6 +83,8 @@ public class GameScreen extends Screen {
 			}
 		}
 		
+		// Iterates through each glowing arrow in the list and updates it. will also check if it needs to be removed first
+		// and will remove it if needed.
 		for(int i = 0; i < arrowsGlow.size(); i++) {
 			if(arrowsGlow.get(i).removed()) {
 				arrowsGlow.remove(i);
@@ -97,6 +98,7 @@ public class GameScreen extends Screen {
 	}
 	
 	public void render() {
+		// Draws the main game interface
 		game.get2DGraphics().drawImage(Images.GUI_BACKGROUND, 0, 0, game.getDrawWidth(), game.getDrawHeight(), null);
 		game.get2DGraphics().setColor(new Color(199, 125, 1));
 		game.get2DGraphics().fillRect(45, 302, 80, 24);
@@ -107,6 +109,7 @@ public class GameScreen extends Screen {
 		game.get2DGraphics().drawString("Combo: " + game.combo + "x", 280, 90);
 		game.get2DGraphics().drawImage(Images.GUI_ARROW_BOARD, 20, 20, 256, 256, null);
 		
+		// Draws the Picard portrait representing his mood.
 		game.get2DGraphics().drawImage(Images.GUI_PICARD_MOOD[Picard.portraitIndex], 60, 335, 180, 180, null);
 		
 		// draws green line
@@ -124,6 +127,7 @@ public class GameScreen extends Screen {
 			arrows.get(i).render();
 		}
 		
+		// Draws all the glowing arrows to the screen.
 		for(int i = 0; i < arrowsGlow.size(); i++) {
 			arrowsGlow.get(i).render();
 		}
