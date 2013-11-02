@@ -49,14 +49,15 @@ public class Game extends Canvas implements Runnable {
 	private Thread gameThread;
 	
 	// Is the game launched as an applet? (Web)
-	private boolean isApplet;
+	private boolean isApplet = false;
 	
 	public Game(boolean isApplet) {
 		instance = this;
 		this.isApplet = isApplet;
 		frame = new JFrame(TITLE);
 		frame.setSize(new Dimension(WIDTH, HEIGHT));
-		if(!isApplet) frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exits program when frame is closed.
+		if(!isApplet) 
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exits program when frame is closed.
 		frame.setLocationRelativeTo(null); // Positions the frame in the middle of the screen.
 		frame.add(instance); // Adds the game (canvas) to the frame so we can draw 'n shit.
 		frame.setVisible(true); // Makes the window visible.
@@ -68,13 +69,8 @@ public class Game extends Canvas implements Runnable {
 	private void init() {
 		screen = new SplashScreen(this);
 		input = new InputHandler(this);
-		if(!isApplet) {
-			actualWidth = WIDTH - (frame.getInsets().left + frame.getInsets().right);
-			actualHeight = HEIGHT - (frame.getInsets().top + frame.getInsets().bottom);
-		} else {
-			actualWidth = 800;
-			actualHeight = 567;
-		}
+		actualWidth = WIDTH - (frame.getInsets().left + frame.getInsets().right);
+		actualHeight = HEIGHT - (frame.getInsets().top + frame.getInsets().bottom);
 	}
 	
 	/**

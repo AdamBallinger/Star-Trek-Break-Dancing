@@ -6,6 +6,7 @@ import gamejam.team_filipino.src.entities.Arrow;
 import gamejam.team_filipino.src.entities.ArrowGlow;
 import gamejam.team_filipino.src.entities.Picard;
 import gamejam.team_filipino.src.utils.MathHelper;
+import gamejam.team_filipino.src.utils.Vector2D;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -60,10 +61,10 @@ public class GameScreen extends Screen {
 		// Randomly determines a new arrow to be added to game. (0.3 , 0.1)
 		if(arrowTime >= MathHelper.getSeconds(arrowTimeMax)) {
 			if(rand.nextBoolean()) {
-				arrows.add(new Arrow(rand.nextInt(4), 200, 25));
+				arrows.add(new Arrow(rand.nextInt(4), new Vector2D(200, 25)));
 			} else {
 				if(arrowTime >= MathHelper.getSeconds(arrowTimeMin)) {
-					arrows.add(new Arrow(rand.nextInt(4), 65, 25));
+					arrows.add(new Arrow(rand.nextInt(4), new Vector2D(65, 25)));
 				}
 			}
 			arrowTime = 0;
@@ -73,9 +74,9 @@ public class GameScreen extends Screen {
 		for(int i = 0; i < arrows.size(); i++) {
 			if(arrows.get(i).removed()) {
 				if(arrows.get(i).hit()) {
-					arrowsGlow.add(new ArrowGlow((int)arrows.get(i).x, (int)arrows.get(i).y, arrows.get(i).id, 0));
+					arrowsGlow.add(new ArrowGlow((int)arrows.get(i).pos.x, (int)arrows.get(i).pos.y, arrows.get(i).id, 0));
 				} else {
-					arrowsGlow.add(new ArrowGlow((int)arrows.get(i).x, (int)arrows.get(i).y, arrows.get(i).id, 1));
+					arrowsGlow.add(new ArrowGlow((int)arrows.get(i).pos.x, (int)arrows.get(i).pos.y, arrows.get(i).id, 1));
 				}
 				arrows.remove(i);
 			} else {

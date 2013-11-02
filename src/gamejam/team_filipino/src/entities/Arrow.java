@@ -4,11 +4,12 @@ import gamejam.team_filipino.src.Game;
 import gamejam.team_filipino.src.Images;
 import gamejam.team_filipino.src.Sound;
 import gamejam.team_filipino.src.screens.LostScreen;
+import gamejam.team_filipino.src.utils.Vector2D;
 
 public class Arrow {
 
-	// x and y coordinate for the arrow
-	public double x, y;
+	// Stores the position of the arrow.
+	public Vector2D pos;
 	// width of the arrow
 	private int width = 32;
 	// height of the arrow
@@ -24,10 +25,9 @@ public class Arrow {
 	/**
 	 * Arrow Constructor
 	 * @param id : int : Arrow id (direction).
-	 * @param x : double : Staring X of arrow.
-	 * @param y : double : Stating Y of arrow.
+	 * @param pos : Vector2D : Position of arrow
 	 */
-	public Arrow(int id, int x, int y) {
+	public Arrow(int id, Vector2D pos) {
 		// Checks the id to make sure its valid.
 		if(id < 0 || id > 3) {
 			// a runtime exception will close the program because arrow id needs to be 0-3
@@ -36,8 +36,7 @@ public class Arrow {
 		} else {
 			this.id = id;
 		}
-		this.x = x;
-		this.y = y;
+		this.pos = pos;
 	}
 	
 	/**
@@ -71,20 +70,20 @@ public class Arrow {
 		 * Moves the arrows according to their ID to different "lanes".
 		 */
 		if(id == 1) {
-			x = 50;
+			pos.x = 50;
 		} else if(id == 0) {
-			x = 108;
+			pos.x = 108;
 		} else if(id == 3) {
-			x = 160;
+			pos.x = 160;
 		} else if(id == 2) {
-			x = 210;
+			pos.x = 210;
 		}
 		
 		// moves arrows down
-		y += 2.5;
+		pos.y += 2.5;
 		
 		// If the arrow is past the red line
-		if(y >= 245) {
+		if(pos.y >= 245) {
 			hit = false;
 			Picard.portraitIndex = 2;
 			remove();
@@ -95,7 +94,7 @@ public class Arrow {
 			case 0: // UP
 				if(Game.instance.input.up.clicked) {
 					// checks if the arrow is between the green and red bar.
-					if((y + (height / 2)) >= 195 && (y + (height / 2)) <= 235) { 
+					if((pos.y + (height / 2)) >= 195 && (pos.y + (height / 2)) <= 235) { 
 						Game.instance.score += 20;
 						Game.instance.combo++;
 						Sound.hit_note.play();
@@ -114,7 +113,7 @@ public class Arrow {
 			case 1: // LEFT
 				if(Game.instance.input.left.clicked) {
 					// checks if the arrow is between the green and red bar.
-					if((y + (height / 2)) >= 195 && (y + (height / 2)) <= 235) {
+					if((pos.y + (height / 2)) >= 195 && (pos.y + (height / 2)) <= 235) {
 						Game.instance.score += 20;
 						Game.instance.combo++;
 						Sound.hit_note.play();
@@ -132,7 +131,7 @@ public class Arrow {
 			case 2: // RIGHT
 				if(Game.instance.input.right.clicked) {
 					// checks if the arrow is between the green and red bar.
-					if((y + (height / 2)) >= 195 && (y + (height / 2)) <= 235) {
+					if((pos.y + (height / 2)) >= 195 && (pos.y + (height / 2)) <= 235) {
 						Game.instance.score += 20;
 						Game.instance.combo++;
 						Sound.hit_note.play();
@@ -150,7 +149,7 @@ public class Arrow {
 			case 3: // DOWN
 				if(Game.instance.input.down.clicked) {
 					// checks if the arrow is between the green and red bar.
-					if((y + (height / 2)) >= 195 && (y + (height / 2)) <= 235) {
+					if((pos.y + (height / 2)) >= 195 && (pos.y + (height / 2)) <= 235) {
 						Game.instance.score += 20;
 						Game.instance.combo++;
 						Sound.hit_note.play();
@@ -191,7 +190,7 @@ public class Arrow {
 	 * Renders the arrow.
 	 */
 	public void render() {
-		Game.instance.get2DGraphics().drawImage(Images.ARROW_SET[id], (int)x, (int)y, width, height, null);
+		Game.instance.get2DGraphics().drawImage(Images.ARROW_SET[id], (int)pos.x, (int)pos.y, width, height, null);
 	}
 	
 }
