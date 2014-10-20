@@ -9,5 +9,3 @@ Credits
 Programmer / Tester - Adam Ballinger 
 
 Artist / Designer - Thomas Cornall 
-
-Testing / Research - Tayler Stapleton
